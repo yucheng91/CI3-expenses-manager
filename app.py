@@ -12,7 +12,11 @@ connection = pymysql.connect(
 app = Flask(__name__)
 
 @app.route('/home')
-def index():
+def home():
+    return render_template('index.html')
+
+@app.route('/viewall')
+def viewall():
      cursor = connection.cursor(pymysql.cursors.DictCursor)
      sql = 'SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id'
      cursor.execute(sql)
@@ -20,13 +24,13 @@ def index():
      for r in cursor:
          results.append(r)
      print(results)
-     return render_template('index.html', data=results)
+     return render_template('transaction_overview.html', data=results)
      
-@app.route('/new/transaction/', methods=["GET"])
+@app.route('/new-transaction/', methods=["GET"])
 def new_supplier():
     return render_template('new_transaction.html')
     
-@app.route('/new/transaction/', methods=["POST"])
+@app.route('/new-transaction/', methods=["POST"])
 def addtransaction():
     transaction_name = request.form.get("transaction")
     category_name = request.form.get("category")
