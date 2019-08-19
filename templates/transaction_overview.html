@@ -7,54 +7,75 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/style.css" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <title>Hello, world!</title>
   </head>
   <body>
     <div class='container'>
         <div class="row">
-        <img src="../images/dew.jpg">
+        <img src="/static/images/dew.jpg"/>
         </div>
         <h1>Dew's Family Expenses Tracker</h1>
-        <table class='table'>
-            <thead>
+        <table class="table table-hover">
+            <thead class="thead-light">
                 <tr>
-                    <th>Transaction</th>
-                    <th>Category</th>
-                    <th>Mode of transaction</th>
-                    <th>By</th>
-                    <th>Date</th>
-                    <th>Debit</th>
-                    <th>Credit</th>
+                    <th scope="col">Transaction</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Mode of transaction</th>
+                    <th scope="col">By</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Debit</th>
+                    <th scope="col">Credit</th>
+                    <th scope="col">Update</th>
                 </tr>
             </thead>
             {%for r in data%}
             <tr>
-                <td>
+                <tbody>
+                <td scope="row">
                 {{ r['description'] }}
                 </td>
-                <td>
+                <td scope="row">
                 {{ r['cname'] }}
                 </td>
-                <td>
+                <td scope="row">
                 {{ r['mname'] }}
                 </td>
-                <td>
+                <td scope="row">
                 {{ r['aname'] }}
                 </td>
-                <td>
+                <td scope="row">
                 {{ r['createdAt'] }}
                 </td>
-                <td>
+                <td scope="row">
                 {{ r['debit'] }}
                 </td>
-                <td>
+                <td scope="row">
                 {{ r['credit'] }}
                 </td>
+                <td scope="row">
+                   <a href='{{ url_for('edit_transaction', id=r['id'] )}}'>Edit</a>
+               </td>
+               </tbody>
             </tr>
+            
             {%endfor%}
         </table>
+            <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Total Debit</th>
+                    <th>Total Credit</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+                <tr>
+                    <td>{{totaldebit['totaldebit']}}</td>
+                    <td>{{totalcredit['totalcredit']}}</td>
+                    <td>{{balance['balance']}}</td>
+                </tr>
+            </table>
     </div>
 
     <!-- Optional JavaScript -->
