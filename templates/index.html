@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/style.css" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
     <title>Family Expenses Manager</title>
 </head>
@@ -16,7 +16,7 @@
 <body>
     <div class='container'>
         <div class="row">
-            <img src="../images/dew.jpg">
+            <img src="static/images/dew.jpg">
         </div>
         <h1>Dew's Family Expenses Manager</h1>
         <h2>Welcome back!</h2>

@@ -20,7 +20,7 @@ def home():
 @app.route('/view-all')
 def viewall():
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = 'SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id'
+    sql = "SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id"
     cursor.execute(sql)
     results = []
     for r in cursor:
@@ -104,11 +104,11 @@ def process_addtransaction():
     sql = "INSERT INTO transaction (description,categoriesid,modeid,accountid,debit,credit) VALUE (%s,%s,%s,%s,%s,%s)"
     cursor.execute(sql,[transaction_name,category_name,mode_name,by_name,debit_name,credit_name])
     
-    # transitionid = "SELECT id FROM transaction"
-    # tagid = request.form.get("tag")
-    
-    # sql = "INSERT INTO transactiontag (transactionid,tagid) VALUE (null,%s)"
-    # cursor.execute(sql,[transitionid,tagid])
+    transactionid = cursor.lastrowid
+    tagid = request.form.getlist("tag")
+    for t in tagid:
+        sql = "INSERT INTO transactiontag (transactionid,tagid) VALUE (%s,%s)"
+        cursor.execute(sql,[transactionid,t])
     
     connection.commit() 
     return redirect(url_for('viewall'))
@@ -118,11 +118,10 @@ def process_addtransaction():
 def edit_transaction(id):
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT * FROM transaction WHERE id = {}".format(id)
+    sql = "SELECT * FROM transaction JOIN transactiontag ON transaction.id = transactiontag.transactionid JOIN tag ON transactiontag.tagid = tag.id WHERE transaction.id = {}".format(id)
     cursor.execute(sql)
     transaction = cursor.fetchone()
-    
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
+
     sql = "SELECT * FROM mode"
     # fetch all genres and store it in a list
     cursor.execute(sql)
@@ -133,7 +132,6 @@ def edit_transaction(id):
             'name': r['mname']
         })
         
-    # fetch all media type and store it in a list
     sql = "SELECT * FROM categories"
     cursor.execute(sql)
     categories = []
@@ -143,7 +141,6 @@ def edit_transaction(id):
             'name': r['cname']
         })
     
-    # fetch all media type and store it in a list
     sql = "SELECT * FROM account"
     cursor.execute(sql)
     account = []
@@ -181,13 +178,7 @@ def update_transaction(id):
     cursor = connection.cursor(pymysql.cursors.DictCursor)
 
     cursor.execute("UPDATE transaction SET description = '{}',categoriesid = '{}',modeid = '{}',accountid = '{}',debit = '{}',credit = '{}' WHERE id = {}".format(transaction_name,category_name,mode_name,by_name,debit_name,credit_name,id))
-    
-    # transitionid = "SELECT id FROM transaction"
-    # tagid = request.form.get("tag")
-    
-    # sql = "INSERT INTO transactiontag (transactionid,tagid) VALUE (null,%s)"
-    # cursor.execute(sql,[transitionid,tagid])
-    
+        
     connection.commit() 
     return redirect(url_for('viewall'))
     
