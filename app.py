@@ -17,7 +17,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/viewall')
+@app.route('/view-all')
 def viewall():
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = 'SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id'
@@ -111,27 +111,86 @@ def process_addtransaction():
     # cursor.execute(sql,[transitionid,tagid])
     
     connection.commit() 
-    return "Transaction record has been added"
+    return redirect(url_for('viewall'))
 
-# Edit new Supplier
-@app.route('/edit/transaction/<id>')
+# Edit transaction
+@app.route('/view-all/edit/<id>')
 def edit_transaction(id):
+    
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM transaction WHERE id = {}".format(id)
     cursor.execute(sql)
     transaction = cursor.fetchone()
-    return render_template('edit_transaction.html', transaction = transaction)
-
-@app.route('/edit/supplier/<SupplierID>', methods=['POST'])
-def update_supplier(SupplierID):
     
-    supplier_name = request.form.get('supplier_name')
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    cursor.execute("UPDATE Suppliers SET CompanyName = '{}' WHERE SupplierID = {}".format(supplier_name, SupplierID))
+    sql = "SELECT * FROM mode"
+    # fetch all genres and store it in a list
+    cursor.execute(sql)
+    mode = []
+    for r in cursor:
+        mode.append({
+            'id' : r['id'],
+            'name': r['mname']
+        })
+        
+    # fetch all media type and store it in a list
+    sql = "SELECT * FROM categories"
+    cursor.execute(sql)
+    categories = []
+    for r in cursor:
+        categories.append({
+            'id':r['id'],
+            'name': r['cname']
+        })
     
-    connection.commit()
-    return redirect(url_for('supplier'))
+    # fetch all media type and store it in a list
+    sql = "SELECT * FROM account"
+    cursor.execute(sql)
+    account = []
+    for r in cursor:
+        account.append({
+            'id':r['id'],
+            'name': r['aname']
+        })
+        
+    sql = "SELECT * FROM tag"
+    cursor.execute(sql)
+    tag = []
+    for r in cursor:
+        tag.append({
+            'id':r['id'],
+            'name': r['tname']
+        })
+        
+    return render_template('edit_transaction.html', transaction = transaction, mode=mode, categories=categories, account=account, tag=tag)
 
+@app.route('/view-all/edit/<id>', methods=['POST'])
+def update_transaction(id):
+    transaction_name = request.form.get("transaction")
+    category_name = request.form.get("category")
+    mode_name = request.form.get("mode")
+    by_name = request.form.get("by")
+    debit_name = request.form.get("debit")
+    if request.form.get("debit") == "":
+        debit_name = "0"
+        
+    credit_name = request.form.get("credit")
+    if request.form.get("credit") == "":
+        credit_name = "0"
+        
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+
+    cursor.execute("UPDATE transaction SET description = '{}',categoriesid = '{}',modeid = '{}',accountid = '{}',debit = '{}',credit = '{}' WHERE id = {}".format(transaction_name,category_name,mode_name,by_name,debit_name,credit_name,id))
+    
+    # transitionid = "SELECT id FROM transaction"
+    # tagid = request.form.get("tag")
+    
+    # sql = "INSERT INTO transactiontag (transactionid,tagid) VALUE (null,%s)"
+    # cursor.execute(sql,[transitionid,tagid])
+    
+    connection.commit() 
+    return redirect(url_for('viewall'))
+    
 # "magic code" -- boilerplate
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
