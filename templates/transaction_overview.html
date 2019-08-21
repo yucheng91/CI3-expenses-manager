@@ -81,7 +81,7 @@
                 <td scope="row">
                    <a class="btn btn-outline-primary" href='{{ url_for('edit_transaction', id=r['id'] )}}' role="button">Edit</a>
                    <br>
-                   <a class="btn btn-outline-danger" href='{{ url_for('edit_transaction', id=r['id'] )}}' role="button">Delete</a>
+                   <a class="btn btn-outline-danger" href='{{ url_for('confirm_delete_transaction', id=r['id'] )}}' role="button">Delete</a>
                </td>
                </tbody>
             </tr>

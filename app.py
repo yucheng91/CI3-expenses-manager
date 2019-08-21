@@ -189,6 +189,27 @@ def update_transaction(id):
     connection.commit() 
     return redirect(url_for('viewall'))
     
+@app.route('/view-all/delete/<id>')
+def confirm_delete_transaction(id):
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id WHERE transaction.id = {}".format(id)
+    cursor.execute(sql)
+    transaction = cursor.fetchone()
+    
+    return render_template('delete_transaction.html', transaction = transaction)
+
+@app.route('/view-all/delete/<id>', methods=['POST'])
+def delete_transaction(id):
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "DELETE FROM transactiontag WHERE transactiontag.transactionid = {}".format(id)
+    cursor.execute(sql)
+    
+    sql = "DELETE FROM transaction WHERE transaction.id = {}".format(id)
+    cursor.execute(sql)
+    
+    connection.commit()
+    return redirect(url_for('viewall'))
+    
 # "magic code" -- boilerplate
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
