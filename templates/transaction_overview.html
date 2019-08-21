@@ -15,7 +15,7 @@
   <body>
       
     <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="#">Expenses Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
   </div>
     </nav>
     <!--end nav-->
-    
+  <div id='content'>
     <div class='container'>
         <div class="row">
         <img src="/static/images/dew.jpg"/>
@@ -70,7 +70,7 @@
                 {{ r['aname'] }}
                 </td>
                 <td scope="row">
-                {{ r['createdAt'] }}
+                {{ r['createdAt']}}
                 </td>
                 <td scope="row">
                 {{ r['debit'] }}
@@ -79,7 +79,9 @@
                 {{ r['credit'] }}
                 </td>
                 <td scope="row">
-                   <a href='{{ url_for('edit_transaction', id=r['id'] )}}'>Edit</a>
+                   <a class="btn btn-outline-primary" href='{{ url_for('edit_transaction', id=r['id'] )}}' role="button">Edit</a>
+                   <br>
+                   <a class="btn btn-outline-danger" href='{{ url_for('edit_transaction', id=r['id'] )}}' role="button">Delete</a>
                </td>
                </tbody>
             </tr>
@@ -100,6 +102,7 @@
                 </tr>
             </table>
     </div>
+  </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

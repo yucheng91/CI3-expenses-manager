@@ -18,7 +18,7 @@
 
 <body>
     <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="#">Expenses Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -38,6 +38,7 @@
   </div>
     </nav>
     <!--end nav-->
+<div id ="content">
   <div class="container">
     <h1>Edit Transaction</h1>
     <form method='post'>
@@ -85,12 +86,13 @@
                   </label>
         <select name='tag' class='form-control selectpicker' Multiple data-live-search="true">
                   {%for d in tag %}
-                  <option value='{{ d['id'] }}' {%if d['id'] == transaction.tagid %}selected='selected'{%endif%}>{{ d['name'] }}</option>
+                  <option value='{{ d['id'] }}' {%if d['id'] == id %}selected='selected'{%endif%}>{{ d['name'] }}</option>
                        {%endfor%}
               </select>
         <input type='submit' class='btn btn-primary mt-3'>
     </form>
   </div>
+</div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

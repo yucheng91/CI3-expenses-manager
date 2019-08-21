@@ -121,9 +121,11 @@ def edit_transaction(id):
     sql = "SELECT * FROM transaction JOIN transactiontag ON transaction.id = transactiontag.transactionid JOIN tag ON transactiontag.tagid = tag.id WHERE transaction.id = {}".format(id)
     cursor.execute(sql)
     transaction = cursor.fetchone()
+    
+    sql = "DELETE FROM transactiontag WHERE transactiontag.transactionid = {}".format(id)
+    cursor.execute(sql)
 
     sql = "SELECT * FROM mode"
-    # fetch all genres and store it in a list
     cursor.execute(sql)
     mode = []
     for r in cursor:
@@ -178,6 +180,11 @@ def update_transaction(id):
     cursor = connection.cursor(pymysql.cursors.DictCursor)
 
     cursor.execute("UPDATE transaction SET description = '{}',categoriesid = '{}',modeid = '{}',accountid = '{}',debit = '{}',credit = '{}' WHERE id = {}".format(transaction_name,category_name,mode_name,by_name,debit_name,credit_name,id))
+    
+    tagid = request.form.getlist("tag")
+    for t in tagid:
+        sql = "INSERT INTO transactiontag (transactionid,tagid) VALUE (%s,%s)"
+        cursor.execute(sql,[id,t])
         
     connection.commit() 
     return redirect(url_for('viewall'))

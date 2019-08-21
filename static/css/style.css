@@ -4,3 +4,27 @@ img {
     margin-right:auto;
 }
 
+#content {
+    padding-top:56px;
+}
+
+.btn {
+    margin:3px;
+}
+
+@media (max-width: 255px){
+body {
+    font-size:90%;
+}
+}
+
+@media (max-width: 255px){
+
+#content{
+padding-top:96px;
+}
+
+body {
+    font-size:80%;
+}
+}
