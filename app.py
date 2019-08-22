@@ -27,7 +27,38 @@ def home():
     sql = "SELECT (SELECT SUM(debit) AS sumdebit FROM transaction) - (SELECT SUM(credit) AS sumcredit FROM transaction) AS balance FROM transaction"
     cursor.execute(sql)
     balance = cursor.fetchone()
-    return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance)
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(debit) AS pdebit FROM transaction WHERE accountid = 1"
+    cursor.execute(sql)
+    pdebit = cursor.fetchone()
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(debit) AS mdebit FROM transaction WHERE accountid = 2"
+    cursor.execute(sql)
+    mdebit = cursor.fetchone()
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(debit) AS bdebit FROM transaction WHERE accountid = 3"
+    cursor.execute(sql)
+    bdebit = cursor.fetchone()
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(credit) AS pcredit FROM transaction WHERE accountid = 1"
+    cursor.execute(sql)
+    pcredit = cursor.fetchone()
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(credit) AS mcredit FROM transaction WHERE accountid = 2"
+    cursor.execute(sql)
+    mcredit = cursor.fetchone()
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(credit) AS bcredit FROM transaction WHERE accountid = 3"
+    cursor.execute(sql)
+    bcredit = cursor.fetchone()
+    
+    return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance,pdebit = pdebit,mdebit = mdebit,bdebit = bdebit,pcredit=pcredit,mcredit=mcredit,bcredit=bcredit)
 
 @app.route('/view-all')
 def viewall():
@@ -221,6 +252,40 @@ def delete_transaction(id):
     
     connection.commit()
     return redirect(url_for('viewall'))
+    
+# @app.route('/chart')
+# def chart():
+#     cursor = connection.cursor(pymysql.cursors.DictCursor)
+#     sql = "SELECT SUM(debit) AS pdebit FROM transaction WHERE accountid = 1"
+#     cursor.execute(sql)
+#     pdebit = cursor.fetchone()
+    
+#     cursor = connection.cursor(pymysql.cursors.DictCursor)
+#     sql = "SELECT SUM(debit) AS mdebit FROM transaction WHERE accountid = 2"
+#     cursor.execute(sql)
+#     mdebit = cursor.fetchone()
+    
+#     cursor = connection.cursor(pymysql.cursors.DictCursor)
+#     sql = "SELECT SUM(debit) AS bdebit FROM transaction WHERE accountid = 3"
+#     cursor.execute(sql)
+#     bdebit = cursor.fetchone()
+    
+#     cursor = connection.cursor(pymysql.cursors.DictCursor)
+#     sql = "SELECT SUM(credit) AS pcredit FROM transaction WHERE accountid = 1"
+#     cursor.execute(sql)
+#     pcredit = cursor.fetchone()
+    
+#     cursor = connection.cursor(pymysql.cursors.DictCursor)
+#     sql = "SELECT SUM(credit) AS mcredit FROM transaction WHERE accountid = 2"
+#     cursor.execute(sql)
+#     mcredit = cursor.fetchone()
+    
+#     cursor = connection.cursor(pymysql.cursors.DictCursor)
+#     sql = "SELECT SUM(credit) AS bcredit FROM transaction WHERE accountid = 3"
+#     cursor.execute(sql)
+#     bcredit = cursor.fetchone()
+    
+#     return render_template('chart.html',pdebit = pdebit,mdebit = mdebit,bdebit = bdebit,pcredit=pcredit,mcredit=mcredit,bcredit=bcredit)
     
 # "magic code" -- boilerplate
 if __name__ == '__main__':
