@@ -15,7 +15,19 @@ app = Flask(__name__)
 
 @app.route('/home')
 def home():
-    return render_template('index.html')
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(debit) AS totaldebit FROM transaction"
+    cursor.execute(sql)
+    totaldebit = cursor.fetchone()
+    
+    sql = "SELECT SUM(credit) AS totalcredit FROM transaction"
+    cursor.execute(sql)
+    totalcredit = cursor.fetchone()
+
+    sql = "SELECT (SELECT SUM(debit) AS sumdebit FROM transaction) - (SELECT SUM(credit) AS sumcredit FROM transaction) AS balance FROM transaction"
+    cursor.execute(sql)
+    balance = cursor.fetchone()
+    return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance)
 
 @app.route('/view-all')
 def viewall():
@@ -38,7 +50,7 @@ def viewall():
     cursor.execute(sql)
     balance = cursor.fetchone()
 
-    return render_template('transaction_overview.html', data=results, totaldebit = totaldebit, totalcredit = totalcredit,balance=balance)
+    return render_template('transaction_overview.html', data=results,totaldebit = totaldebit, totalcredit = totalcredit,balance=balance)
      
 @app.route('/new-transaction/', methods=["GET"])
 def addtransaction():
