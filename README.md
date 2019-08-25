@@ -1,15 +1,54 @@
-         ___        ______     ____ _                 _  ___  
-        / \ \      / / ___|   / ___| | ___  _   _  __| |/ _ \ 
-       / _ \ \ /\ / /\___ \  | |   | |/ _ \| | | |/ _` | (_) |
-      / ___ \ V  V /  ___) | | |___| | (_) | |_| | (_| |\__, |
-     /_/   \_\_/\_/  |____/   \____|_|\___/ \__,_|\__,_|  /_/ 
- ----------------------------------------------------------------- 
+# Family Money Tracker
+
+[Click here for website](to be deployed)
+
+_Developed By Yu Cheng_
+
+## Index
+1. Introduction
+2. UI/UX
+3. Technologies Used
+4. Features
+5. Testing
+6. Deployment
+7. Credit
+
+## Introduction
+This project is developed as a money tracker for a family for better management of family budget.  
+
+It provide a simple and clear chart interface at the main page and preset users are able to add/view/modify/delete any of their input at any point in time.
+
+## UI/UX 
+### Design
+- Bootstrap is used in the development of the site as it provide framework for mobile responsive site. Buttons & table are all based on same Bootstrap framework to ensure consistentcy in design.
+- Users are determined upon initial set up in mysql to ensure that the records added are exclusively for the selected user (for example, the family of 3)
+- Collapsable nav bar is used to ensure that the navbar will not be blocking additional screen estate on smaller screen size.
+- Certain information for input (such as payment mode,categories) are also preset for the user for ease of use and standardise the information in the database.
+
+### User Stories
+Several user stories have been considered during the development and set up
+- _As the user, I would like to have the breakdown of every information at first glance in the website_
+- _As the user, I should be able to navigate the page with ease with the use of icon and buttons_
+- _As the user, adding and editing information should be made simple for me_
 
 
-Hi there! Welcome to AWS Cloud9!
+### Technologies Used
+1. HTML/CSS
+2. Bootstrap
+3. Flask
+4. MySQL
+5. PhpMyAdmin
+6. Javascript
+7. Chart.JS
+8. FontAwesome
 
-To get started, create some files, play with the terminal,
-or visit https://docs.aws.amazon.com/console/cloud9/ for our documentation.
+### Features
+- Main page : Overview of all the income/expenses/balance via Chart.JS
+- Add Transaction : Enable users to add in their transaction easily
+- History : View all the transaction history, along with the ability to edit/delete them
 
-Happy coding!
-# CI3-expenses-manager
+Chart.JS will auto-update based on the value changed during each create/modify/delete of transaction
+
+### Testing
+As this is a website based on data input by users to the database, Jasmine testing is not used hence all the testing has been done manually.
+The following are the manual testing results:

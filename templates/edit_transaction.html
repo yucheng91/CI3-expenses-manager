@@ -18,7 +18,7 @@
 
 <body>
     <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" href="#">Expenses Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -38,10 +38,19 @@
   </div>
     </nav>
     <!--end nav-->
+    
     <div id ="content">
-  <div class="container">
-    <h1>Edit Transaction</h1>
-    <form method='post'>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+          <div class="text-center header">
+            <h1 class="h2 mb-0"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Transaction</h1>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+    <form method='POST'>
       <class='form-group'>
         <label class='label'>
                       Description:
@@ -90,65 +99,12 @@
                        {%endfor%}
               </select>
         <input type='submit' class='btn btn-primary mt-3'>
-        <a class='btn btn-primary mt-3' href='{{url_for('viewall')}}'>back</a>
+        <a class='btn btn-primary mt-3' href='{{url_for('viewall')}}'>Back</a>
     </form>
+    </div>
+    </div>
   </div>
 </div>
-<!--<div id ="content">-->
-<!--  <div class="container">-->
-<!--    <h1>Edit Transaction</h1>-->
-<!--    <form method='post'>-->
-<!--      <class='form-group'>-->
-<!--        <label class='label'>-->
-<!--                      Description:-->
-<!--                  </label>-->
-<!--        <input type='text' class='form-control' name='transaction' value="{{ transaction['description'] }}">-->
-<!--        <label class='label'>-->
-<!--                      Category:-->
-<!--                  </label>-->
-<!--        <select name='category' class='form-control selectpicker' data-live-search="true">-->
-<!--                          {%for d in categories%}-->
-<!--                          <option value='{{ d['id'] }}' {%if d['id'] == transaction.categoriesid %} selected='selected'{%endif%}>{{ d['name'] }}</option>-->
-<!--                               {%endfor%}-->
-<!--                      </select>-->
-<!--        <label class='label'>-->
-<!--                      Mode of Transaction:-->
-<!--                  </label>-->
-<!--        <select name='mode' class='form-control selectpicker' data-live-search="true" value="{{ transaction['modeid'] }}">-->
-<!--                  {%for d in mode %}-->
-<!--                  <option value='{{ d['id'] }}' {%if d['id'] == transaction.modeid %} selected='selected'{%endif%}>{{ d['name'] }}</option>-->
-<!--                       {%endfor%}-->
-<!--              </select>-->
-<!--        <label class='label'>-->
-<!--                      By:-->
-<!--                  </label>-->
-<!--        <select name='by' class='form-control selectpicker' data-live-search="true" value="{{ transaction['accountid'] }}">-->
-<!--                  {%for d in account %}-->
-<!--                  <option value='{{ d['id'] }}' {%if d['id'] == transaction.accountid %} selected='selected'{%endif%}>{{ d['name'] }}</option>-->
-<!--                       {%endfor%}-->
-<!--              </select>-->
-<!--        <label class='label'>-->
-<!--                      Debit:-->
-<!--                  </label>-->
-<!--        <input type='text' class='form-control' name='debit' value="{{ transaction['debit'] }}">-->
-<!--        </class>-->
-<!--        <label class='label'>-->
-<!--                      Credit:-->
-<!--                  </label>-->
-<!--        <input type='text' class='form-control' name='credit' value="{{ transaction['credit'] }}">-->
-<!--        </class>-->
-<!--        <label class='tag'>-->
-<!--                      Tag (Optional):-->
-<!--                  </label>-->
-<!--        <select name='tag' class='form-control selectpicker' Multiple data-live-search="true">-->
-<!--                  {%for d in tag %}-->
-<!--                  <option value='{{ d['id'] }}' {%if d['id'] == id %}selected='selected'{%endif%}>{{ d['name'] }}</option>-->
-<!--                       {%endfor%}-->
-<!--              </select>-->
-<!--        <input type='submit' class='btn btn-primary mt-3'>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</div>-->
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

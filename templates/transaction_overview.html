@@ -15,7 +15,7 @@
   <body>
       
     <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" href="#">Expenses Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -35,20 +35,25 @@
   </div>
     </nav>
     <!--end nav-->
-  <div id='content'>
-    <div class='container'>
-        <div class="row">
-        <img src="/static/images/dew.jpg"/>
+          
+  <div id='content-v'>
+    <div class='container-fluid'>
+      <div class="row">
+        <div class="col">
+      <div class="text-center header">
+        <h1 class="h2 mb-0"><i class="fa fa-th-list" aria-hidden="true"></i> History</h1>
         </div>
-        <h1>Dew's Family Expenses Tracker</h1>
+      </div>
+      </div>
+      <div class="row">
         <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Transaction</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Mode of transaction</th>
+                    <th scope="col" class = "hidden">Category</th>
+                    <th scope="col" class = "hidden">Mode of transaction</th>
                     <th scope="col">By</th>
-                    <th scope="col">Date</th>
+                    <th scope="col" class = "hidden">Date</th>
                     <th scope="col">Debit</th>
                     <th scope="col">Credit</th>
                     <th scope="col">Update</th>
@@ -60,16 +65,16 @@
                 <td scope="row">
                 {{ r['description'] }}
                 </td>
-                <td scope="row">
+                <td scope="row" class = "hidden">
                 {{ r['cname'] }}
                 </td>
-                <td scope="row">
+                <td scope="row" class = "hidden">
                 {{ r['mname'] }}
                 </td>
                 <td scope="row">
                 {{ r['aname'] }}
                 </td>
-                <td scope="row">
+                <td scope="row" class = "hidden">
                 {{ r['createdAt']}}
                 </td>
                 <td scope="row">
@@ -87,20 +92,7 @@
             </tr>
             {%endfor%}
         </table>
-            <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th>Total Debit</th>
-                    <th>Total Credit</th>
-                    <th>Balance</th>
-                </tr>
-            </thead>
-                <tr>
-                    <td>{{totaldebit['totaldebit']}}</td>
-                    <td>{{totalcredit['totalcredit']}}</td>
-                    <td>{{balance['balance']}}</td>
-                </tr>
-            </table>
+        </div>
     </div>
   </div>
 

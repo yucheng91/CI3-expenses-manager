@@ -16,7 +16,7 @@
 
 <body>
     <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" href="#">Expenses Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -38,23 +38,24 @@
     <!--end nav-->
     
 <div id="content">
-          <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</h1>
+          <div class="row">
+            <div class="col">
+          <div class="text-center header">
+            <h1 class="h2 mb-0"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</h1>
           </div>
-          
-          
+          </div>
+          </div>
         <div class="row">
             <!-- Pie Chart -->
             <div class="col"></div>
-            <div class="col-xl-5 col-lg-5">
+            <div class="col-xl-3 col-lg-3">
               <div class="card shadow border-info mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header border-info py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-info">Income</h6>
+                  <h5 class="m-0 font-weight-bold text-info">Income</h5>
+                  <div class="h6 mb-0 font-weight-bold text-gray-800">${{totaldebit['totaldebit']}}</div>
+                      <i class="fa fa-calendar text-gray-300"></i>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -77,11 +78,13 @@
             </div>
 
             <!-- Pie Chart -->
-            <div class="col-xl-5 col-lg-5">
-              <div class="card shadow border-danger mb-4">
+            <div class="col-xl-3 col-lg-3">
+              <div class="card shadow border-warning mb-4">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header border-danger py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-danger">Expenses</h6>
+                <div class="card-header border-warning py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h5 class="m-0 font-weight-bold text-warning">Expense</h5>
+                  <div class="h6 mb-0 font-weight-bold text-gray-800">${{totalcredit['totalcredit']}}</div>
+                      <i class="fa fa-money text-gray-300"></i>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -102,64 +105,33 @@
                 </div>
               </div>
             </div>
+                        <!-- Pie Chart -->
+            <div class="col-xl-3 col-lg-3">
+              <div class="card shadow border-success mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header border-success py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h5 class="m-0 font-weight-bold text-success">Balance</h5>
+                  <div class="h6 mb-0 font-weight-bold text-gray-800">${{balance['balance']}}</div>
+                      <i class="fa fa-balance-scale text-gray-300"></i>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myChart3"></canvas>
+                  </div>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fa fa-circle text-info"></i> Balance
+                    </span>
+                    <span class="mr-2">
+                      <i class="fa fa-circle text-warning"></i> Expenses
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="col"></div>
           </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Debit</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$ {{totaldebit['totaldebit']}}</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fa fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Credit</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$ {{totalcredit['totalcredit']}}</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fa fa-money fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Balance</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$ {{balance['balance']}}</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fa fa-balance-scale fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        <!-- /.container-fluid -->
-        </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
@@ -207,6 +179,37 @@
                   data: [{{pcredit['pcredit']}}, {{mcredit['mcredit']}}, {{bcredit['bcredit']}}],
                   backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
                   hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                  hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+              },
+              options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                  backgroundColor: "rgb(255,255,255)",
+                  bodyFontColor: "#858796",
+                  borderColor: '#dddfeb',
+                  borderWidth: 1,
+                  xPadding: 15,
+                  yPadding: 15,
+                  displayColors: false,
+                  caretPadding: 10,
+                },
+                legend: {
+                  display: false
+                },
+                cutoutPercentage: 80,
+              },
+            });
+            
+        var ctx = document.getElementById('myChart3');
+        var myChart = new Chart(ctx, {
+              type: 'doughnut',
+              data: {
+                labels: ["Expenses", "Balance"],
+                datasets: [{
+                  data: [{{totalcredit['totalcredit']}}, {{balance['balance']}}],
+                  backgroundColor: ['#f6c23e', '#36b9cc'],
+                  hoverBackgroundColor: ['#e0b036', '#2c9faf'],
                   hoverBorderColor: "rgba(234, 236, 244, 1)",
                 }],
               },

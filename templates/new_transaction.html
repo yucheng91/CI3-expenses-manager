@@ -18,7 +18,7 @@
 
 <body>
     <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" href="#">Expenses Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -38,10 +38,19 @@
   </div>
     </nav>
     <!--end nav-->
-    
+          
 <div id="content">
-  <div class="container">
-    <h1>Add New Transaction</h1>
+    <!-- Page Heading -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="text-center header">
+      <h1 class="h2 mb-0"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add Transaction</h1>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col">
     <form method='post'>
       <class='form-group'>
         <label class='label'>
@@ -92,11 +101,15 @@
               </select>
         <input type='submit' class='btn btn-primary mt-3'>
     </form>
+    </div>
+    </div>
   </div>
 </div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.14.0/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,98 +1,119 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-      
-    <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="#">Expenses Tracker</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+
+  <!--nav bar-->
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Expenses Tracker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('home') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('addtransaction') }}"><i class="fa fa-plus-square" aria-hidden="true"></i> Add Transaction</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ url_for('viewall') }}"><i class="fa fa-th-list" aria-hidden="true"></i> History</a>
-      </li>
-    </ul>
-  </div>
-    </nav>
-    <!--end nav-->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('home') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('addtransaction') }}"><i class="fa fa-plus-square" aria-hidden="true"></i> Add Transaction</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('viewall') }}"><i class="fa fa-th-list" aria-hidden="true"></i> History</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--end nav-->
+
   <div id='content'>
-    <div class='container'>
-        <div class="row">
-        <img src="/static/images/dew.jpg"/>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <div class="text-center header">
+            <h1 class="h2 mb-0"><i class="fa fa-times" aria-hidden="true"></i> Delete Transaction</h1>
+          </div>
         </div>
-        <table class="table table-hover">
+      </div>
+      <div class="row">
+        <div class="col">
+          <img src="/static/images/dew.jpg" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table table-hover">
             <thead class="thead-light">
-                <tr>
-                    <th scope="col">Transaction</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Mode of transaction</th>
-                    <th scope="col">By</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Debit</th>
-                    <th scope="col">Credit</th>
-                </tr>
+              <tr>
+                <th scope="col">Transaction</th>
+                <th scope="col">Category</th>
+                <th scope="col">Mode of transaction</th>
+                <th scope="col">By</th>
+                <th scope="col">Date</th>
+                <th scope="col">Debit</th>
+                <th scope="col">Credit</th>
+              </tr>
             </thead>
             <tr>
-                <tbody>
+              <tbody>
                 <td scope="row">
-                {{ transaction['description'] }}
+                  {{ transaction['description'] }}
                 </td>
                 <td scope="row">
-                {{ transaction['cname'] }}
+                  {{ transaction['cname'] }}
                 </td>
                 <td scope="row">
-                {{ transaction['mname'] }}
+                  {{ transaction['mname'] }}
                 </td>
                 <td scope="row">
-                {{ transaction['aname'] }}
+                  {{ transaction['aname'] }}
                 </td>
                 <td scope="row">
-                {{ transaction['createdAt']}}
+                  {{ transaction['createdAt']}}
                 </td>
                 <td scope="row">
-                {{ transaction['debit'] }}
+                  {{ transaction['debit'] }}
                 </td>
                 <td scope="row">
-                {{ transaction['credit'] }}
+                  {{ transaction['credit'] }}
                 </td>
-               </tbody>
+              </tbody>
             </tr>
-        </table>
-        
-          <form method='POST' action='{{ url_for("delete_transaction", id=transaction['id']) }}'>
-                 <p>You are deleting this transaction. This cannot be undone! Are you sure?</p>
-                 <input class='btn btn-danger' type='submit' value='Delete'/>
-                 <a class='btn btn-primary' href='{{url_for('viewall')}}'>back</a>
-          </form>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <form method='POST' action='{{ url_for("delete_transaction", id=transaction['id']) }}'>
+          <p>You are deleting this transaction. This cannot be undone! Are you sure?</p>
+          <input class='btn btn-danger' type='submit' value='Delete' />
+          <a class='btn btn-primary' href='{{url_for('viewall')}}'>back</a>
+        </form>
+      </div>
     </div>
   </div>
+  </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
 </html>

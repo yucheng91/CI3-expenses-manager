@@ -63,7 +63,7 @@ def home():
 @app.route('/view-all')
 def viewall():
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id"
+    sql = "SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id ORDER BY transaction.id"
     cursor.execute(sql)
     results = []
     for r in cursor:
@@ -161,7 +161,7 @@ def process_addtransaction():
 def edit_transaction(id):
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT * FROM transaction JOIN transactiontag ON transaction.id = transactiontag.transactionid JOIN tag ON transactiontag.tagid = tag.id WHERE transaction.id = {}".format(id)
+    sql = "SELECT * FROM transaction WHERE id = {}".format(id)
     cursor.execute(sql)
     transaction = cursor.fetchone()
     
@@ -252,40 +252,6 @@ def delete_transaction(id):
     
     connection.commit()
     return redirect(url_for('viewall'))
-    
-# @app.route('/chart')
-# def chart():
-#     cursor = connection.cursor(pymysql.cursors.DictCursor)
-#     sql = "SELECT SUM(debit) AS pdebit FROM transaction WHERE accountid = 1"
-#     cursor.execute(sql)
-#     pdebit = cursor.fetchone()
-    
-#     cursor = connection.cursor(pymysql.cursors.DictCursor)
-#     sql = "SELECT SUM(debit) AS mdebit FROM transaction WHERE accountid = 2"
-#     cursor.execute(sql)
-#     mdebit = cursor.fetchone()
-    
-#     cursor = connection.cursor(pymysql.cursors.DictCursor)
-#     sql = "SELECT SUM(debit) AS bdebit FROM transaction WHERE accountid = 3"
-#     cursor.execute(sql)
-#     bdebit = cursor.fetchone()
-    
-#     cursor = connection.cursor(pymysql.cursors.DictCursor)
-#     sql = "SELECT SUM(credit) AS pcredit FROM transaction WHERE accountid = 1"
-#     cursor.execute(sql)
-#     pcredit = cursor.fetchone()
-    
-#     cursor = connection.cursor(pymysql.cursors.DictCursor)
-#     sql = "SELECT SUM(credit) AS mcredit FROM transaction WHERE accountid = 2"
-#     cursor.execute(sql)
-#     mcredit = cursor.fetchone()
-    
-#     cursor = connection.cursor(pymysql.cursors.DictCursor)
-#     sql = "SELECT SUM(credit) AS bcredit FROM transaction WHERE accountid = 3"
-#     cursor.execute(sql)
-#     bcredit = cursor.fetchone()
-    
-#     return render_template('chart.html',pdebit = pdebit,mdebit = mdebit,bdebit = bdebit,pcredit=pcredit,mcredit=mcredit,bcredit=bcredit)
     
 # "magic code" -- boilerplate
 if __name__ == '__main__':
