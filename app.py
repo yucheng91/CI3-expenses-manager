@@ -155,7 +155,7 @@ def process_addtransaction():
         debit_name = 0
         
     credit_name = request.form.get("credit")
-    if request.form.get("credit") == "":
+    if credit_name == "":
         credit_name = 0
         
     cursor = connection.cursor(pymysql.cursors.DictCursor)
@@ -230,11 +230,11 @@ def update_transaction(id):
     by_name = request.form.get("by")
     
     debit_name = request.form.get("debit")
-    if request.form.get("debit") == "":
+    if debit_name == "":
         debit_name = 0
         
     credit_name = request.form.get("credit")
-    if request.form.get("credit") == "":
+    if credit_name == "":
         credit_name = 0
         
     cursor = connection.cursor(pymysql.cursors.DictCursor)
