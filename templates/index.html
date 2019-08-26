@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Gaegu&display=swap" rel="stylesheet">
 
     <title>Hello, world!</title>
 </head>
@@ -64,13 +65,13 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fa fa-circle text-primary"></i> Papa Dew
+                      <i class="fa fa-circle text-primary"></i> {{name1['name1']}}
                     </span>
                     <span class="mr-2">
-                      <i class="fa fa-circle text-success"></i> Mama Dew
+                      <i class="fa fa-circle text-success"></i> {{name2['name2']}}
                     </span>
                     <span class="mr-2">
-                      <i class="fa fa-circle text-info"></i> Brother Dew
+                      <i class="fa fa-circle text-info"></i> {{name3['name3']}}
                     </span>
                   </div>
                 </div>
@@ -93,13 +94,13 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fa fa-circle text-primary"></i> Papa Dew
+                      <i class="fa fa-circle text-primary"></i> {{name1['name1']}}
                     </span>
                     <span class="mr-2">
-                      <i class="fa fa-circle text-success"></i> Mama Dew
+                      <i class="fa fa-circle text-success"></i> {{name2['name2']}}
                     </span>
                     <span class="mr-2">
-                      <i class="fa fa-circle text-info"></i> Brother Dew
+                      <i class="fa fa-circle text-info"></i> {{name3['name3']}}
                     </span>
                   </div>
                 </div>
@@ -143,9 +144,9 @@
         var myChart = new Chart(ctx, {
               type: 'doughnut',
               data: {
-                labels: ["Papa Dew", "Mama Dew", "Brother Dew"],
+                labels: ["{{name1['name1']}}", "{{name2['name2']}}","{{name3['name3']}}"],
                 datasets: [{
-                  data: [{{pdebit['pdebit']}}, {{mdebit['mdebit']}}, {{bdebit['bdebit']}}],
+                  data: [{{debit1['debit1']}}, {{debit2['debit2']}}, {{debit3['debit3']}}],
                   backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
                   hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
                   hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -174,9 +175,9 @@
         var myChart = new Chart(ctx, {
               type: 'doughnut',
               data: {
-                labels: ["Papa Dew", "Mama Dew", "Brother Dew"],
+                labels: ["{{name1['name1']}}", "{{name2['name2']}}","{{name3['name3']}}"],
                 datasets: [{
-                  data: [{{pcredit['pcredit']}}, {{mcredit['mcredit']}}, {{bcredit['bcredit']}}],
+                  data: [{{credit1['credit1']}}, {{credit2['credit2']}}, {{credit3['credit3']}}],
                   backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
                   hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
                   hoverBorderColor: "rgba(234, 236, 244, 1)",

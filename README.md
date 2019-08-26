@@ -50,5 +50,7 @@ Several user stories have been considered during the development and set up
 Chart.JS will auto-update based on the value changed during each create/modify/delete of transaction
 
 ### Testing
-As this is a website based on data input by users to the database, Jasmine testing is not used hence all the testing has been done manually.
-The following are the manual testing results:
+As this is a website based on data input by users to the database, Jasmine testing is not used hence all the testing has been done manually.  
+The following are the test result:
+- Keying in negative value (eg: -2000) in either debit/credit will directly substract the amount from their respective field. However taking into consideration in scenario where we received any cashback/reimbusement/discount (eg: spent $1000 and received $100 cashback for same purchase in later time), it is not considered as additional income so it should be substracted under the credit amount itself. 
+- For the chart.js, information are passed from app.py to index.html through flask. As those figures are necessary for the chart, the script for chart.js are included in the index.html itself for the chart visualization purposes.

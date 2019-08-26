@@ -1,3 +1,8 @@
+body {
+    background-image: url("../images/paper.jpg");
+    font-family: 'Gaegu', cursive;
+}
+
 img {
     width: 75%;
     margin-left: auto;
@@ -6,14 +11,14 @@ img {
 
 #content {
     /*padding-top:56px;*/
-    border: 3px solid black;
+    border: 3px solid rgb(133,135,150);
     border-radius: 20px;
     margin: 76px 20px 20px 20px;
 }
 
 #content-v {
     /*padding-top:56px;*/
-    border: 3px solid black;
+    border: 3px solid rgb(133,135,150);
     border-radius: 20px;
     margin: 76px 5px 5px 5px;
     overflow-x: auto;
@@ -25,6 +30,20 @@ img {
 
 .header {
     padding: 20px;
+}
+
+form {
+    text-align:center;
+}
+
+.button {
+    text-align:center;
+}
+
+.dialogue p {
+    padding:5px;
+    border:3px solid rgb(133,135,150);
+    border-radius: 20px;
 }
 
 @media (max-width: 851px) {

@@ -29,36 +29,51 @@ def home():
     balance = cursor.fetchone()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT SUM(debit) AS pdebit FROM transaction WHERE accountid = 1"
+    sql = "SELECT aname AS name1 FROM account WHERE id = 1"
     cursor.execute(sql)
-    pdebit = cursor.fetchone()
+    name1 = cursor.fetchone()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT SUM(debit) AS mdebit FROM transaction WHERE accountid = 2"
+    sql = "SELECT aname AS name2 FROM account WHERE id = 2"
     cursor.execute(sql)
-    mdebit = cursor.fetchone()
+    name2 = cursor.fetchone()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT SUM(debit) AS bdebit FROM transaction WHERE accountid = 3"
+    sql = "SELECT aname AS name3 FROM account WHERE id = 3"
     cursor.execute(sql)
-    bdebit = cursor.fetchone()
+    name3 = cursor.fetchone()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT SUM(credit) AS pcredit FROM transaction WHERE accountid = 1"
+    sql = "SELECT SUM(debit) AS debit1 FROM transaction WHERE accountid = 1"
     cursor.execute(sql)
-    pcredit = cursor.fetchone()
+    debit1 = cursor.fetchone()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT SUM(credit) AS mcredit FROM transaction WHERE accountid = 2"
+    sql = "SELECT SUM(debit) AS debit2 FROM transaction WHERE accountid = 2"
     cursor.execute(sql)
-    mcredit = cursor.fetchone()
+    debit2 = cursor.fetchone()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT SUM(credit) AS bcredit FROM transaction WHERE accountid = 3"
+    sql = "SELECT SUM(debit) AS debit3 FROM transaction WHERE accountid = 3"
     cursor.execute(sql)
-    bcredit = cursor.fetchone()
+    debit3 = cursor.fetchone()
     
-    return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance,pdebit = pdebit,mdebit = mdebit,bdebit = bdebit,pcredit=pcredit,mcredit=mcredit,bcredit=bcredit)
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(credit) AS credit1 FROM transaction WHERE accountid = 1"
+    cursor.execute(sql)
+    credit1 = cursor.fetchone()
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(credit) AS credit2 FROM transaction WHERE accountid = 2"
+    cursor.execute(sql)
+    credit2 = cursor.fetchone()
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = "SELECT SUM(credit) AS credit3 FROM transaction WHERE accountid = 3"
+    cursor.execute(sql)
+    credit3 = cursor.fetchone()
+    
+    return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance,debit1 = debit1,debit2 = debit2,debit3 = debit3,credit1=credit1,credit2=credit2,credit3=credit3, name1=name1, name2=name2, name3=name3)
 
 @app.route('/view-all')
 def viewall():
@@ -134,13 +149,14 @@ def process_addtransaction():
     category_name = request.form.get("category")
     mode_name = request.form.get("mode")
     by_name = request.form.get("by")
+    
     debit_name = request.form.get("debit")
-    if request.form.get("debit") == "":
-        debit_name = "0"
+    if debit_name == "":
+        debit_name = 0
         
     credit_name = request.form.get("credit")
     if request.form.get("credit") == "":
-        credit_name = "0"
+        credit_name = 0
         
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     
@@ -212,13 +228,14 @@ def update_transaction(id):
     category_name = request.form.get("category")
     mode_name = request.form.get("mode")
     by_name = request.form.get("by")
+    
     debit_name = request.form.get("debit")
     if request.form.get("debit") == "":
-        debit_name = "0"
+        debit_name = 0
         
     credit_name = request.form.get("credit")
     if request.form.get("credit") == "":
-        credit_name = "0"
+        credit_name = 0
         
     cursor = connection.cursor(pymysql.cursors.DictCursor)
 

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+    <link href="https://fonts.googleapis.com/css?family=Gaegu&display=swap" rel="stylesheet">
+    
     <title>Hello, world!</title>
   </head>
   <body>
@@ -83,7 +84,7 @@
                 <td scope="row">
                 {{ r['credit'] }}
                 </td>
-                <td scope="row">
+                <td scope="row" class="button">
                    <a class="btn btn-outline-primary" href='{{ url_for('edit_transaction', id=r['id'] )}}' role="button">Edit</a>
                    <br>
                    <a class="btn btn-outline-danger" href='{{ url_for('confirm_delete_transaction', id=r['id'] )}}' role="button">Delete</a>
