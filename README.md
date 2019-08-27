@@ -54,6 +54,7 @@ As this is a website based on data input by users to the database, Jasmine testi
 The following are the test result:
 - Keying in negative value (eg: -2000) in either debit/credit will directly substract the amount from their respective field. However taking into consideration in scenario where we received any cashback/reimbusement/discount (eg: spent $1000 and received $100 cashback for same purchase in later time), it is not considered as additional income so it should be substracted under the credit amount itself. 
 - For the chart.js, information are passed from app.py to index.html through flask. As those figures are necessary for the chart, the script for chart.js are included in the index.html itself for the chart visualization purposes.
+- Tables are only mobile responsive until a certain width where content can never fit into the limited width anymore. In order to prevent excessive overflow scrolling and preserve readability, I have hidden certain column to show only the important information in the limited screen width.
 
 ### Deployment
 Most of the development has been developed on GitHub and deployed on Heroku as final product.

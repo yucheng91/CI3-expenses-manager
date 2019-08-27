@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymysql
@@ -13,7 +14,7 @@ connection = pymysql.connect(
 
 app = Flask(__name__)
 
-@app.route('/home')
+@app.route('/')
 def home():
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(debit) AS totaldebit FROM transaction"
@@ -28,47 +29,38 @@ def home():
     cursor.execute(sql)
     balance = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT aname AS name1 FROM account WHERE id = 1"
+    sql = "SELECT aname FROM account WHERE id = 1"
     cursor.execute(sql)
     name1 = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT aname AS name2 FROM account WHERE id = 2"
+    sql = "SELECT aname FROM account WHERE id = 2"
     cursor.execute(sql)
     name2 = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql = "SELECT aname AS name3 FROM account WHERE id = 3"
+    sql = "SELECT aname FROM account WHERE id = 3"
     cursor.execute(sql)
     name3 = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(debit) AS debit1 FROM transaction WHERE accountid = 1"
     cursor.execute(sql)
     debit1 = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(debit) AS debit2 FROM transaction WHERE accountid = 2"
     cursor.execute(sql)
     debit2 = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(debit) AS debit3 FROM transaction WHERE accountid = 3"
     cursor.execute(sql)
     debit3 = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(credit) AS credit1 FROM transaction WHERE accountid = 1"
     cursor.execute(sql)
     credit1 = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(credit) AS credit2 FROM transaction WHERE accountid = 2"
     cursor.execute(sql)
     credit2 = cursor.fetchone()
     
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(credit) AS credit3 FROM transaction WHERE accountid = 3"
     cursor.execute(sql)
     credit3 = cursor.fetchone()

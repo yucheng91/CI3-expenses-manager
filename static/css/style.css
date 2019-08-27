@@ -5,7 +5,7 @@ body {
 }
 
 nav {
-    background-color: rgba(202, 72, 46, 0.9);
+    background-color: rgba(202, 72, 46, 0.95);
     color: white;
 }
 
@@ -109,9 +109,5 @@ h4 {
 
     #content {
         padding-top: 96px;
-    }
-
-    body {
-        font-size: 90%;
     }
 }
