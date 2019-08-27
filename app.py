@@ -84,19 +84,7 @@ def viewall():
     for r in cursor:
          results.append(r)
          
-    sql = "SELECT SUM(debit) AS totaldebit FROM transaction"
-    cursor.execute(sql)
-    totaldebit = cursor.fetchone()
-    
-    sql = "SELECT SUM(credit) AS totalcredit FROM transaction"
-    cursor.execute(sql)
-    totalcredit = cursor.fetchone()
-
-    sql = "SELECT (SELECT SUM(debit) AS sumdebit FROM transaction) - (SELECT SUM(credit) AS sumcredit FROM transaction) AS balance FROM transaction"
-    cursor.execute(sql)
-    balance = cursor.fetchone()
-
-    return render_template('transaction_overview.html', data=results,totaldebit = totaldebit, totalcredit = totalcredit,balance=balance)
+    return render_template('transaction_overview.html', data=results)
      
 @app.route('/new-transaction/', methods=["GET"])
 def addtransaction():
@@ -269,6 +257,35 @@ def delete_transaction(id):
     
     connection.commit()
     return redirect(url_for('viewall'))
+
+@app.route('/tags',methods=['GET'])
+def tags():
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    
+    sql = "SELECT * FROM tag"
+    cursor.execute(sql)
+    tag = []
+    for r in cursor:
+        tag.append({
+            'id':r['id'],
+            'name': r['tname']
+        })
+        
+    tagid = request.args.get('tag')
+    if tagid == None:
+        tagid = 0
+        
+    sql = "SELECT * FROM tag JOIN transactiontag ON tag.id = transactiontag.tagid JOIN transaction ON transactiontag.transactionid = transaction.id JOIN categories ON categories.id = transaction.categoriesid JOIN mode ON mode.id = transaction.modeid JOIN account ON account.id = transaction.accountid WHERE tagid={}".format(tagid)
+    cursor.execute(sql)
+    results = []
+    for r in cursor:
+         results.append(r)
+   
+    sql ="SELECT * FROM tag WHERE id={}".format(tagid)
+    cursor.execute(sql)
+    currenttag = cursor.fetchone()
+        
+    return render_template('searchtags.html', tag=tag, data=results, currenttag = currenttag)
     
 # "magic code" -- boilerplate
 if __name__ == '__main__':

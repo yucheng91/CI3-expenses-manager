@@ -36,18 +36,18 @@ Several user stories have been considered during the development and set up
 1. HTML/CSS
 2. Bootstrap
 3. Flask
-4. MySQL
-5. PhpMyAdmin
-6. Javascript
-7. Chart.JS
-8. FontAwesome
+4. MySQL & PhpMyAdmin (for databases creation)
+5. Javascript (for Chart.JS)
+6. Chart.JS (for visualization purposes)
+7. FontAwesome (for icon)
+8. Google Fonts (for consistency of font in different platform)
 
 ### Features
 - Main page : Overview of all the income/expenses/balance via Chart.JS
 - Add Transaction : Enable users to add in their transaction easily
 - History : View all the transaction history, along with the ability to edit/delete them
-
-Chart.JS will auto-update based on the value changed during each create/modify/delete of transaction
+- Tag search : users are able to view the transaction based on the tag they have selected as in input. Tagging is optional hence the edit/delete feature only available in History as it contains all the records with/without tagging.
+- Chart.JS will auto-update based on the value changed during each create/modify/delete of transaction
 
 ### Testing
 As this is a website based on data input by users to the database, Jasmine testing is not used hence all the testing has been done manually.  

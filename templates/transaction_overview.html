@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel='shortcut icon' href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type='image/x-icon' />
     <link href="https://fonts.googleapis.com/css?family=Gaegu&display=swap" rel="stylesheet">
     
     <title>Hello, world!</title>
@@ -16,8 +17,8 @@
   <body>
       
     <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">Expenses Tracker</a>
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
+    <h1 class="navbar-brand">Expenses Tracker</h1>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -31,6 +32,9 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{{ url_for('viewall') }}"><i class="fa fa-th-list" aria-hidden="true"></i> History</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('tags') }}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a>
       </li>
     </ul>
   </div>
@@ -96,6 +100,10 @@
         </div>
     </div>
   </div>
+  
+  <footer>
+    <p>Designed by Yu Cheng</p>
+  </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

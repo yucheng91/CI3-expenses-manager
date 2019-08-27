@@ -1,5 +1,29 @@
 body {
-    background-image: url("../images/paper.jpg");
+    /*background-image: url("../images/paper.jpg");*/
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    font-family: 'Gaegu', cursive;
+}
+
+nav {
+    background-color: rgba(202, 72, 46, 0.9);
+    color: white;
+}
+
+nav a {
+    color: white;
+    font-family: 'Gaegu', cursive;
+    text-decoration: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    height: 23px;
+    text-align:center;
+    background-color: rgba(202, 72, 46, 0.9);
+    color: white;
     font-family: 'Gaegu', cursive;
 }
 
@@ -10,18 +34,19 @@ img {
 }
 
 #content {
-    /*padding-top:56px;*/
     border: 3px solid rgb(133,135,150);
     border-radius: 20px;
-    margin: 76px 20px 20px 20px;
+    margin: 76px 20px 49px 20px;
+    padding-bottom:24px;
+    color:rgb(71,74,81);
 }
 
 #content-v {
-    /*padding-top:56px;*/
     border: 3px solid rgb(133,135,150);
     border-radius: 20px;
-    margin: 76px 5px 5px 5px;
+    margin: 76px 5px 29px 5px;
     overflow-x: auto;
+    color:rgb(71,74,81);
 }
 
 .btn {
@@ -44,6 +69,10 @@ form {
     padding:5px;
     border:3px solid rgb(133,135,150);
     border-radius: 20px;
+}
+
+h4 {
+    text-align:center;
 }
 
 @media (max-width: 851px) {
@@ -76,12 +105,6 @@ form {
 
 }
 
-@media (max-width: 411px) {
-    body {
-        font-size: 90%;
-    }
-}
-
 @media (max-width: 255px) {
 
     #content {
@@ -89,6 +112,6 @@ form {
     }
 
     body {
-        font-size: 80%;
+        font-size: 90%;
     }
 }

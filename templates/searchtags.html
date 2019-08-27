@@ -32,87 +32,90 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('addtransaction') }}"><i class="fa fa-plus-square" aria-hidden="true"></i> Add Transaction</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="{{ url_for('viewall') }}"><i class="fa fa-th-list" aria-hidden="true"></i> History</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('tags') }}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a>
-        </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('tags') }}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a>
+      </li>
       </ul>
     </div>
   </nav>
   <!--end nav-->
 
   <div id='content-v'>
-    <div class="container-fluid">
+    <div class='container-fluid'>
       <div class="row">
         <div class="col">
           <div class="text-center header">
-            <h1 class="h2 mb-0"><i class="fa fa-times" aria-hidden="true"></i> Delete Transaction</h1>
+            <h1 class="h2 mb-0"><i class="fa fa-tags" aria-hidden="true"></i> Tags</h1>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <img src="/static/images/dew.jpg" />
+          <form class='form mt-3 mb-3' method='GET'>
+            <label class='tag'>
+                      Search By Tag :
+                  </label>
+            <select name='tag' class='form-control selectpicker' data-live-search="true">
+                  {%for d in tag %}
+                  <option value='{{ d['id'] }}' {%if d['id'] == id %}selected='selected'{%endif%}>{{ d['name'] }}</option>
+                       {%endfor%}
+              </select>
+            <input type="submit" value='Search' class='btn btn-primary mt-3' />
+          </form>
         </div>
-      </div>
+      </div>      
       <div class="row">
-        <div class="col">
-          <table class="table table-hover">
+        <table class="table table-hover">
+          <div class='col'>
+                <h4>Current Selection : {{currenttag['tname']}}</h4>
+            </div>
             <thead class="thead-light">
-              <tr>
-                <th scope="col">Transaction</th>
-                <th scope="col" class = "hidden">Category</th>
-                <th scope="col"  class = "hidden">Mode of transaction</th>
-                <th scope="col">By</th>
-                <th scope="col"  class = "hidden">Date</th>
-                <th scope="col">Debit</th>
-                <th scope="col">Credit</th>
-              </tr>
+                <tr>
+                    <th scope="col">Transaction</th>
+                    <th scope="col" class = "hidden">Category</th>
+                    <th scope="col" class = "hidden">Mode of transaction</th>
+                    <th scope="col">By</th>
+                    <th scope="col" class = "hidden">Date</th>
+                    <th scope="col">Debit</th>
+                    <th scope="col">Credit</th>
+                </tr>
             </thead>
+            {%for r in data%}
             <tr>
-              <tbody>
+                <tbody>
                 <td scope="row">
-                  {{ transaction['description'] }}
+                {{ r['description'] }}
                 </td>
-                <td scope="row"  class = "hidden">
-                  {{ transaction['cname'] }}
+                <td scope="row" class = "hidden">
+                {{ r['cname'] }}
                 </td>
-                <td scope="row"  class = "hidden">
-                  {{ transaction['mname'] }}
-                </td>
-                <td scope="row">
-                  {{ transaction['aname'] }}
-                </td>
-                <td scope="row"  class = "hidden">
-                  {{ transaction['createdAt']}}
+                <td scope="row" class = "hidden">
+                {{ r['mname'] }}
                 </td>
                 <td scope="row">
-                  {{ transaction['debit'] }}
+                {{ r['aname'] }}
+                </td>
+                <td scope="row" class = "hidden">
+                {{ r['createdAt']}}
                 </td>
                 <td scope="row">
-                  {{ transaction['credit'] }}
+                {{ r['debit'] }}
                 </td>
-              </tbody>
+                <td scope="row">
+                {{ r['credit'] }}
+                </td>
+               </tbody>
             </tr>
-          </table>
+            {%endfor%}
+        </table>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col dialogue">
-        <form method='POST' action='{{ url_for("delete_transaction", id=transaction['id']) }}'>
-          <p>You are deleting this transaction. This cannot be undone! Are you sure?</p>
-          <input class='btn btn-danger' type='submit' value='Delete' />
-          <a class='btn btn-primary' href='{{url_for('viewall')}}'>back</a>
-        </form>
-      </div>
-      <div class="col"></div>
     </div>
   </div>
-  <footer>
+  
+    <footer>
     <p>Designed by Yu Cheng</p>
   </footer>
 
