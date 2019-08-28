@@ -76,6 +76,7 @@ def home():
     cursor.execute(sql)
     credit3 = cursor.fetchone()
     
+    cursor.close()
     return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance,debit1 = debit1,debit2 = debit2,debit3 = debit3,credit1=credit1,credit2=credit2,credit3=credit3, name1=name1, name2=name2, name3=name3)
 
 @app.route('/view-all')
@@ -87,6 +88,7 @@ def viewall():
     for r in cursor:
          results.append(r)
          
+    cursor.close()
     return render_template('transaction_overview.html', data=results)
      
 @app.route('/new-transaction/', methods=["GET"])
@@ -131,6 +133,7 @@ def addtransaction():
             'id':r['id'],
             'name': r['tname']
         })
+    cursor.close()
     
     return render_template('new_transaction.html', mode=mode, categories=categories, account=account, tag=tag)
     
@@ -160,7 +163,8 @@ def process_addtransaction():
         sql = "INSERT INTO transactiontag (transactionid,tagid) VALUE (%s,%s)"
         cursor.execute(sql,[transactionid,t])
     
-    connection.commit() 
+    connection.commit()
+    cursor.close()
     return redirect(url_for('viewall'))
 
 # Edit transaction
@@ -211,6 +215,7 @@ def edit_transaction(id):
             'name': r['tname']
         })
         
+    cursor.close()
     return render_template('edit_transaction.html', transaction = transaction, mode=mode, categories=categories, account=account, tag=tag)
 
 @app.route('/view-all/edit/<id>', methods=['POST'])
@@ -238,6 +243,7 @@ def update_transaction(id):
         cursor.execute(sql,[id,t])
         
     connection.commit() 
+    cursor.close()
     return redirect(url_for('viewall'))
     
 @app.route('/view-all/delete/<id>')
@@ -247,6 +253,7 @@ def confirm_delete_transaction(id):
     cursor.execute(sql)
     transaction = cursor.fetchone()
     
+    cursor.close()
     return render_template('delete_transaction.html', transaction = transaction)
 
 @app.route('/view-all/delete/<id>', methods=['POST'])
@@ -259,6 +266,7 @@ def delete_transaction(id):
     cursor.execute(sql)
     
     connection.commit()
+    cursor.close()
     return redirect(url_for('viewall'))
 
 @app.route('/tags',methods=['GET'])
@@ -287,7 +295,8 @@ def tags():
     sql ="SELECT * FROM tag WHERE id={}".format(tagid)
     cursor.execute(sql)
     currenttag = cursor.fetchone()
-        
+    
+    cursor.close()
     return render_template('searchtags.html', tag=tag, data=results, currenttag = currenttag)
     
 # "magic code" -- boilerplate
