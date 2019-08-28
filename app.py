@@ -23,7 +23,7 @@ connection = pymysql.connect(
 
 #if PHP doesn't show, perform $ sudo apt-get install --reinstall libapache2-mod-php7.2
 
-app = Flask(__name__,template_folder='templates')
+app = Flask(__name__,template_folder='templates',static_folder='static')
 
 @app.route('/')
 def home():
