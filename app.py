@@ -1,13 +1,24 @@
-
 from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymysql
+import urllib.parse
+from urllib.parse import urlparse
+
+urllib.parse.uses_netloc.append('mysql')
+
+url = urlparse(os.environ['CLEARDB_DATABASE_URL']) 
+name = url.path[1:]
+user = url.username
+password= url.password
+host = url.hostname
+port= url.port
 
 connection = pymysql.connect(
-    host='localhost', # IP address of the database; localhost means "the local machine"
-    user="yucheng91",  #the mysql user
-    password="coconuty", #the password for the user
-    database="expenses" #the name of database we want to use
+    host=host,
+    user=user,
+    password=password,
+    port=port,
+    database=name
 )
 
 #if PHP doesn't show, perform $ sudo apt-get install --reinstall libapache2-mod-php7.2
