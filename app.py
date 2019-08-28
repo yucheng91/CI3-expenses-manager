@@ -21,8 +21,6 @@ connection = pymysql.connect(
     database=name
 )
 
-#if PHP doesn't show, perform $ sudo apt-get install --reinstall libapache2-mod-php7.2
-
 app = Flask(__name__,template_folder='templates',static_folder='static')
 
 @app.route('/')
@@ -31,52 +29,73 @@ def home():
     sql = "SELECT SUM(debit) AS totaldebit FROM transaction"
     cursor.execute(sql)
     totaldebit = cursor.fetchone()
+    cursor.close()
     
+    cursor = connection.cursor(pymysql.cursors.DictCursor)    
     sql = "SELECT SUM(credit) AS totalcredit FROM transaction"
     cursor.execute(sql)
     totalcredit = cursor.fetchone()
+    cursor.close()
 
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT (SELECT SUM(debit) AS sumdebit FROM transaction) - (SELECT SUM(credit) AS sumcredit FROM transaction) AS balance FROM transaction"
     cursor.execute(sql)
     balance = cursor.fetchone()
+    cursor.close()
     
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT aname FROM account WHERE id = 1"
     cursor.execute(sql)
     name1 = cursor.fetchone()
-    
+    cursor.close()
+
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT aname FROM account WHERE id = 2"
     cursor.execute(sql)
     name2 = cursor.fetchone()
-    
+
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT aname FROM account WHERE id = 3"
     cursor.execute(sql)
     name3 = cursor.fetchone()
+    cursor.close()
     
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(debit) AS debit1 FROM transaction WHERE accountid = 1"
     cursor.execute(sql)
     debit1 = cursor.fetchone()
+    cursor.close()
     
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(debit) AS debit2 FROM transaction WHERE accountid = 2"
     cursor.execute(sql)
     debit2 = cursor.fetchone()
-    
+    cursor.close()
+
+    cursor = connection.cursor(pymysql.cursors.DictCursor)    
     sql = "SELECT SUM(debit) AS debit3 FROM transaction WHERE accountid = 3"
     cursor.execute(sql)
     debit3 = cursor.fetchone()
-    
+    cursor.close()
+  
+    cursor = connection.cursor(pymysql.cursors.DictCursor)  
     sql = "SELECT SUM(credit) AS credit1 FROM transaction WHERE accountid = 1"
     cursor.execute(sql)
     credit1 = cursor.fetchone()
-    
+    cursor.close()
+
+    cursor = connection.cursor(pymysql.cursors.DictCursor)  
     sql = "SELECT SUM(credit) AS credit2 FROM transaction WHERE accountid = 2"
     cursor.execute(sql)
     credit2 = cursor.fetchone()
-    
+    cursor.close()
+
+    cursor = connection.cursor(pymysql.cursors.DictCursor)    
     sql = "SELECT SUM(credit) AS credit3 FROM transaction WHERE accountid = 3"
     cursor.execute(sql)
     credit3 = cursor.fetchone()
-    
     cursor.close()
+    
     return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance,debit1 = debit1,debit2 = debit2,debit3 = debit3,credit1=credit1,credit2=credit2,credit3=credit3, name1=name1, name2=name2, name3=name3)
 
 @app.route('/view-all')
@@ -96,7 +115,6 @@ def addtransaction():
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM mode"
-    # fetch all genres and store it in a list
     cursor.execute(sql)
     mode = []
     for r in cursor:
@@ -104,8 +122,9 @@ def addtransaction():
             'id' : r['id'],
             'name': r['mname']
         })
+    cursor.close()
         
-    # fetch all media type and store it in a list
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM categories"
     cursor.execute(sql)
     categories = []
@@ -114,8 +133,9 @@ def addtransaction():
             'id':r['id'],
             'name': r['cname']
         })
+    cursor.close()
     
-    # fetch all media type and store it in a list
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM account"
     cursor.execute(sql)
     account = []
@@ -124,7 +144,9 @@ def addtransaction():
             'id':r['id'],
             'name': r['aname']
         })
-        
+    cursor.close()
+
+    cursor = connection.cursor(pymysql.cursors.DictCursor)        
     sql = "SELECT * FROM tag"
     cursor.execute(sql)
     tag = []
@@ -175,10 +197,14 @@ def edit_transaction(id):
     sql = "SELECT * FROM transaction WHERE id = {}".format(id)
     cursor.execute(sql)
     transaction = cursor.fetchone()
+    cursor.close()
     
+    cursor = connection.cursor(pymysql.cursors.DictCursor)    
     sql = "DELETE FROM transactiontag WHERE transactiontag.transactionid = {}".format(id)
     cursor.execute(sql)
-
+    cursor.close()
+    
+    cursor = connection.cursor(pymysql.cursors.DictCursor)    
     sql = "SELECT * FROM mode"
     cursor.execute(sql)
     mode = []
@@ -187,7 +213,9 @@ def edit_transaction(id):
             'id' : r['id'],
             'name': r['mname']
         })
+    cursor.close()
         
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM categories"
     cursor.execute(sql)
     categories = []
@@ -196,7 +224,9 @@ def edit_transaction(id):
             'id':r['id'],
             'name': r['cname']
         })
-    
+    cursor.close()
+        
+    cursor = connection.cursor(pymysql.cursors.DictCursor)  
     sql = "SELECT * FROM account"
     cursor.execute(sql)
     account = []
@@ -205,7 +235,9 @@ def edit_transaction(id):
             'id':r['id'],
             'name': r['aname']
         })
+    cursor.close()
         
+    cursor = connection.cursor(pymysql.cursors.DictCursor)        
     sql = "SELECT * FROM tag"
     cursor.execute(sql)
     tag = []
@@ -214,8 +246,8 @@ def edit_transaction(id):
             'id':r['id'],
             'name': r['tname']
         })
-        
     cursor.close()
+    
     return render_template('edit_transaction.html', transaction = transaction, mode=mode, categories=categories, account=account, tag=tag)
 
 @app.route('/view-all/edit/<id>', methods=['POST'])
@@ -234,9 +266,10 @@ def update_transaction(id):
         credit_name = 0
         
     cursor = connection.cursor(pymysql.cursors.DictCursor)
-
     cursor.execute("UPDATE transaction SET description = '{}',categoriesid = '{}',modeid = '{}',accountid = '{}',debit = '{}',credit = '{}' WHERE id = {}".format(transaction_name,category_name,mode_name,by_name,debit_name,credit_name,id))
-    
+    cursor.close()
+        
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     tagid = request.form.getlist("tag")
     for t in tagid:
         sql = "INSERT INTO transactiontag (transactionid,tagid) VALUE (%s,%s)"
@@ -252,8 +285,8 @@ def confirm_delete_transaction(id):
     sql = "SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id WHERE transaction.id = {}".format(id)
     cursor.execute(sql)
     transaction = cursor.fetchone()
-    
     cursor.close()
+    
     return render_template('delete_transaction.html', transaction = transaction)
 
 @app.route('/view-all/delete/<id>', methods=['POST'])
@@ -261,7 +294,9 @@ def delete_transaction(id):
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "DELETE FROM transactiontag WHERE transactiontag.transactionid = {}".format(id)
     cursor.execute(sql)
-    
+    cursor.close()
+        
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "DELETE FROM transaction WHERE transaction.id = {}".format(id)
     cursor.execute(sql)
     
@@ -281,6 +316,10 @@ def tags():
             'id':r['id'],
             'name': r['tname']
         })
+    
+    cursor.close()
+        
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
         
     tagid = request.args.get('tag')
     if tagid == None:
@@ -291,7 +330,9 @@ def tags():
     results = []
     for r in cursor:
          results.append(r)
-   
+    cursor.close()
+        
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql ="SELECT * FROM tag WHERE id={}".format(tagid)
     cursor.execute(sql)
     currenttag = cursor.fetchone()
