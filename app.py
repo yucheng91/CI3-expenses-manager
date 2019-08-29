@@ -13,18 +13,21 @@ password= url.password
 host = url.hostname
 port= url.port
 
-connection = pymysql.connect(
-    host=host,
-    user=user,
-    password=password,
-    port=port,
-    database=name
-)
+def connect():
+    connection = pymysql.connect(
+        host=host,
+        user=user,
+        password=password,
+        port=port,
+        database=name
+    )
+    return connection
 
 app = Flask(__name__,template_folder='templates',static_folder='static')
 
 @app.route('/')
 def home():
+    connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT SUM(debit) AS totaldebit FROM transaction"
     cursor.execute(sql)
@@ -95,11 +98,13 @@ def home():
     cursor.execute(sql)
     credit3 = cursor.fetchone()
     cursor.close()
+    connection.close()
     
     return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance,debit1 = debit1,debit2 = debit2,debit3 = debit3,credit1=credit1,credit2=credit2,credit3=credit3, name1=name1, name2=name2, name3=name3)
 
 @app.route('/view-all')
 def viewall():
+    connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id ORDER BY transaction.id"
     cursor.execute(sql)
@@ -108,10 +113,12 @@ def viewall():
          results.append(r)
          
     cursor.close()
+    connection.close()
     return render_template('transaction_overview.html', data=results)
      
 @app.route('/new-transaction/', methods=["GET"])
 def addtransaction():
+    connection = connect()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM mode"
@@ -156,11 +163,12 @@ def addtransaction():
             'name': r['tname']
         })
     cursor.close()
-    
+    connection.close()
     return render_template('new_transaction.html', mode=mode, categories=categories, account=account, tag=tag)
     
 @app.route('/new-transaction/', methods=["POST"])
 def process_addtransaction():
+    connection = connect()
     transaction_name = request.form.get("transaction")
     category_name = request.form.get("category")
     mode_name = request.form.get("mode")
@@ -187,12 +195,14 @@ def process_addtransaction():
     
     connection.commit()
     cursor.close()
+    connection.close()
     return redirect(url_for('viewall'))
-
+    
 # Edit transaction
 @app.route('/view-all/edit/<id>')
 def edit_transaction(id):
     
+    connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM transaction WHERE id = {}".format(id)
     cursor.execute(sql)
@@ -247,11 +257,12 @@ def edit_transaction(id):
             'name': r['tname']
         })
     cursor.close()
-    
+    connection.close()
     return render_template('edit_transaction.html', transaction = transaction, mode=mode, categories=categories, account=account, tag=tag)
 
 @app.route('/view-all/edit/<id>', methods=['POST'])
 def update_transaction(id):
+    connection = connect()
     transaction_name = request.form.get("transaction")
     category_name = request.form.get("category")
     mode_name = request.form.get("mode")
@@ -277,20 +288,23 @@ def update_transaction(id):
         
     connection.commit() 
     cursor.close()
+    connection.close()
     return redirect(url_for('viewall'))
     
 @app.route('/view-all/delete/<id>')
 def confirm_delete_transaction(id):
+    connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM transaction JOIN categories ON transaction.categoriesid = categories.id JOIN mode ON transaction.modeid = mode.id JOIN account on transaction.accountid = account.id WHERE transaction.id = {}".format(id)
     cursor.execute(sql)
     transaction = cursor.fetchone()
     cursor.close()
-    
+    connection.close()
     return render_template('delete_transaction.html', transaction = transaction)
 
 @app.route('/view-all/delete/<id>', methods=['POST'])
 def delete_transaction(id):
+    connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "DELETE FROM transactiontag WHERE transactiontag.transactionid = {}".format(id)
     cursor.execute(sql)
@@ -302,10 +316,12 @@ def delete_transaction(id):
     
     connection.commit()
     cursor.close()
+    connection.close()
     return redirect(url_for('viewall'))
 
 @app.route('/tags',methods=['GET'])
 def tags():
+    connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     
     sql = "SELECT * FROM tag"
@@ -318,7 +334,7 @@ def tags():
         })
     
     cursor.close()
-        
+    
     cursor = connection.cursor(pymysql.cursors.DictCursor)
         
     tagid = request.args.get('tag')
@@ -338,6 +354,7 @@ def tags():
     currenttag = cursor.fetchone()
     
     cursor.close()
+    connection.close()
     return render_template('searchtags.html', tag=tag, data=results, currenttag = currenttag)
     
 # "magic code" -- boilerplate
