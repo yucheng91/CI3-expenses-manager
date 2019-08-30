@@ -203,6 +203,7 @@ def process_addtransaction():
 def edit_transaction(id):
     
     connection = connect()
+    
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM transaction WHERE id = {}".format(id)
     cursor.execute(sql)
@@ -210,7 +211,7 @@ def edit_transaction(id):
     cursor.close()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)    
-    sql = "DELETE FROM transactiontag WHERE transactiontag.transactionid = {}".format(id)
+    sql = "DELETE FROM transactiontag WHERE transactionid = {}".format(id)
     cursor.execute(sql)
     cursor.close()
     
@@ -257,7 +258,9 @@ def edit_transaction(id):
             'name': r['tname']
         })
     cursor.close()
+    
     connection.close()
+    
     return render_template('edit_transaction.html', transaction = transaction, mode=mode, categories=categories, account=account, tag=tag)
 
 @app.route('/view-all/edit/<id>', methods=['POST'])
