@@ -211,11 +211,6 @@ def edit_transaction(id):
     cursor.close()
     
     cursor = connection.cursor(pymysql.cursors.DictCursor)    
-    sql = "DELETE FROM transactiontag WHERE transactionid = {}".format(id)
-    cursor.execute(sql)
-    cursor.close()
-    
-    cursor = connection.cursor(pymysql.cursors.DictCursor)    
     sql = "SELECT * FROM mode"
     cursor.execute(sql)
     mode = []
@@ -266,6 +261,13 @@ def edit_transaction(id):
 @app.route('/view-all/edit/<id>', methods=['POST'])
 def update_transaction(id):
     connection = connect()
+    
+    #Delete previous tag due to editing
+    cursor = connection.cursor(pymysql.cursors.DictCursor)    
+    sql = "DELETE FROM transactiontag WHERE transactionid = {}".format(id)
+    cursor.execute(sql)
+    cursor.close()
+    
     transaction_name = request.form.get("transaction")
     category_name = request.form.get("category")
     mode_name = request.form.get("mode")
