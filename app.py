@@ -102,7 +102,7 @@ def home():
     
     return render_template('index.html',totaldebit = totaldebit, totalcredit = totalcredit,balance=balance,debit1 = debit1,debit2 = debit2,debit3 = debit3,credit1=credit1,credit2=credit2,credit3=credit3, name1=name1, name2=name2, name3=name3)
 
-@app.route('/view-all')
+@app.route('/history')
 def viewall():
     connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
@@ -116,7 +116,7 @@ def viewall():
     connection.close()
     return render_template('transaction_overview.html', data=results)
      
-@app.route('/new-transaction/', methods=["GET"])
+@app.route('/add-transaction/', methods=["GET"])
 def addtransaction():
     connection = connect()
     
@@ -166,7 +166,7 @@ def addtransaction():
     connection.close()
     return render_template('new_transaction.html', mode=mode, categories=categories, account=account, tag=tag)
     
-@app.route('/new-transaction/', methods=["POST"])
+@app.route('/add-transaction/', methods=["POST"])
 def process_addtransaction():
     connection = connect()
     transaction_name = request.form.get("transaction")
@@ -199,7 +199,7 @@ def process_addtransaction():
     return redirect(url_for('viewall'))
     
 # Edit transaction
-@app.route('/view-all/edit/<id>')
+@app.route('/history/edit/<id>')
 def edit_transaction(id):
     
     connection = connect()
@@ -258,7 +258,7 @@ def edit_transaction(id):
     
     return render_template('edit_transaction.html', transaction = transaction, mode=mode, categories=categories, account=account, tag=tag)
 
-@app.route('/view-all/edit/<id>', methods=['POST'])
+@app.route('/history/edit/<id>', methods=['POST'])
 def update_transaction(id):
     connection = connect()
     
@@ -296,7 +296,7 @@ def update_transaction(id):
     connection.close()
     return redirect(url_for('viewall'))
     
-@app.route('/view-all/delete/<id>')
+@app.route('/history/delete/<id>')
 def confirm_delete_transaction(id):
     connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
@@ -307,7 +307,7 @@ def confirm_delete_transaction(id):
     connection.close()
     return render_template('delete_transaction.html', transaction = transaction)
 
-@app.route('/view-all/delete/<id>', methods=['POST'])
+@app.route('/history/delete/<id>', methods=['POST'])
 def delete_transaction(id):
     connection = connect()
     cursor = connection.cursor(pymysql.cursors.DictCursor)
