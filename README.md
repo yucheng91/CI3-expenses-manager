@@ -72,6 +72,7 @@ The following are the test result:
 ### Known Bug/Issue (from testing)
 - Any update on ClearDB data through the Heroku site appeared to have slight delay. If changes did not appear, refresh the page while clearing caches will be able to solve the problem.
 - Despite hidden column, the table's width is still too wide for small screen devices such as iPhone 5 (4" 16:9 screen), overflow scrolling has been enabled for left to right scrolling in these devices.
+- Inputting symbol such as ' would potentially affected the SQL input command hence I have limit the description input to be alphanumeric only.
 
 ### Deployment
 Most of the development has been developed on GitHub and deployed on Heroku as final product.

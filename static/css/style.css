@@ -4,7 +4,8 @@ body {
 }
 
 nav {
-    background-color: rgba(202, 72, 46, 0.95);
+    background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+    /*background-color: rgba(202, 72, 46, 0.95);*/
     color: white;
 }
 
@@ -14,14 +15,23 @@ nav a {
     text-decoration: none;
 }
 
+h1 {
+    font-family: 'Crafty Girls', cursive;
+}
+
+#icon {
+    width:40px;
+    height:40px;
+}
+
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
     padding: 0;
-    height: 23px;
-    text-align:center;
-    background-color: rgba(202, 72, 46, 0.9);
+    height: 25px;
+    text-align: center;
+    background-image: linear-gradient(to bottom, #48c6ef 0%, #6f86d6 100%);;
     color: white;
     font-family: 'Gaegu', cursive;
 }

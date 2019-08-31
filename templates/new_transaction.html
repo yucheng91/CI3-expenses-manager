@@ -8,20 +8,20 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.10/dist/css/bootstrap-select.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel='shortcut icon' href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type='image/x-icon' />
   <link href="https://fonts.googleapis.com/css?family=Gaegu&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Crafty+Girls&display=swap" rel="stylesheet">
   
-  <title>Expenses Tracker</title>
+  <title>Family Expenses Tracker - New Transaction</title>
 </head>
 
 <body>
     <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
-    <h1 class="navbar-brand">Expenses Tracker</h1>
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top rounded-bottom">
+    <h1 class="navbar-brand"><img id="icon" src="{{ url_for('static', filename='img/icon.png') }}" alt=""> Family Expenses Tracker</h1>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -61,7 +61,7 @@
         <label class='label'>
                       Description:
                   </label>
-        <input type='text' class='form-control' name='transaction'>
+        <input type='text' class='form-control' pattern="[a-zA-Z0-9\s]+" name='transaction' title="Alphanumeric only">
         <label class='label'>
                       Category:
                   </label>
@@ -87,12 +87,12 @@
                        {%endfor%}
               </select>
         <label class='label'>
-                      Debit:
+                      Debit (SGD$):
                   </label>
         <input type='number' step="0.01" class='form-control' name='debit' placeholder='0.00'>
         </class>
         <label class='label'>
-                      Credit:
+                      Credit (SGD$):
                   </label>
         <input type='number' step="0.01" class='form-control' name='credit' placeholder='0.00'>
         </class>
@@ -111,7 +111,7 @@
   </div>
 </div>
 
-  <footer>
+  <footer class="rounded-top">
     <p>Designed by Yu Cheng</p>
   </footer>
 

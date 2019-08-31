@@ -346,7 +346,7 @@ def tags():
     if tagid == None:
         tagid = 0
         
-    sql = "SELECT * FROM tag JOIN transactiontag ON tag.id = transactiontag.tagid JOIN transaction ON transactiontag.transactionid = transaction.id JOIN categories ON categories.id = transaction.categoriesid JOIN mode ON mode.id = transaction.modeid JOIN account ON account.id = transaction.accountid WHERE tagid={}".format(tagid)
+    sql = "SELECT * FROM tag JOIN transactiontag ON tag.id = transactiontag.tagid JOIN transaction ON transactiontag.transactionid = transaction.id JOIN categories ON categories.id = transaction.categoriesid JOIN mode ON mode.id = transaction.modeid JOIN account ON account.id = transaction.accountid WHERE tagid={} ORDER BY transaction.id".format(tagid)
     cursor.execute(sql)
     results = []
     for r in cursor:
