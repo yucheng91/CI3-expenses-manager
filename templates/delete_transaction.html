@@ -97,10 +97,10 @@
     <div class="row">
       <div class="col"></div>
       <div class="col dialogue">
-        <form method='POST' action='{{ url_for("delete_transaction", id=transaction[' id ']) }}'>
+        <form method='POST' action='{{ url_for("delete_transaction", id=transaction['id']) }}'>
           <p>You are deleting this transaction. This cannot be undone! Are you sure?</p>
-          <input class='btn btn-danger' type='submit' value='Delete' />
-          <a class='btn btn-primary' href='{{url_for(' viewall ')}}'>Back</a>
+          <input class='btn btn-danger' type='submit' value='Delete'/>
+          <a class='btn btn-primary' href='{{url_for('viewall')}}'>Back</a>
         </form>
       </div>
       <div class="col"></div>
