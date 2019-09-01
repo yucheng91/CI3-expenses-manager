@@ -94,13 +94,13 @@ h4 {
     }
 
     #content {
-        padding-top: 56px;
+        padding-top: 75px;
         margin: 0;
         border: 0;
     }
 
     #content-v {
-        padding-top: 56px;
+        padding-top: 75px;
         overflow-x: auto;
         margin: 0;
         border: 0;
@@ -108,21 +108,7 @@ h4 {
 
 }
 
-@media (max-width: 768px) {
-
-    #content {
-        padding-top: 75px;
-        margin: 0;
-        border: 0;
-    }
-
-    #content-v {
-        padding-top: 75px;
-
-    }
-}
-
-@media (max-width: 396px) {
+@media (max-width: 412px) {
 
     #content {
         padding-top: 120px;

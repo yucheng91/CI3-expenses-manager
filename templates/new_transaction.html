@@ -57,11 +57,11 @@
     <div class="row">
       <div class="col">
     <form method='post'>
-      <class='form-group'>
+      <div class='form-group'>
         <label class='label'>
                       Description:
                   </label>
-        <input type='text' class='form-control' pattern="[a-zA-Z0-9\s]+" name='transaction' title="Alphanumeric only">
+        <input type='text' class='form-control' pattern="[a-zA-Z0-9 :()$#%\s]+" name='transaction' title="Alphanumeric and :()$#% only">
         <label class='label'>
                       Category:
                   </label>
@@ -105,10 +105,11 @@
                        {%endfor%}
               </select>
         <input type='submit' class='btn btn-primary mt-3'>
+            </div>
     </form>
     </div>
-    </div>
   </div>
+</div>
 </div>
 
   <footer class="rounded-top">
