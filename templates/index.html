@@ -158,7 +158,7 @@
       data: {
         labels: ["{{name1['aname']}}", "{{name2['aname']}}", "{{name3['aname']}}"],
         datasets: [{
-          data: [{ { debit1['debit1'] } }, { { debit2['debit2'] } }, { { debit3['debit3'] } }],
+          data: [{{debit1['debit1']}}, {{debit2['debit2']}}, {{debit3['debit3']}}],
           backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
           hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
           hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -189,7 +189,7 @@
       data: {
         labels: ["{{name1['aname']}}", "{{name2['aname']}}", "{{name3['aname']}}"],
         datasets: [{
-          data: [{ { credit1['credit1'] } }, { { credit2['credit2'] } }, { { credit3['credit3'] } }],
+          data: [{{credit1['credit1']}}, {{credit2['credit2']}}, {{credit3['credit3']}}],
           backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
           hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
           hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -220,7 +220,7 @@
       data: {
         labels: ["Expenses", "Balance"],
         datasets: [{
-          data: [{ { totalcredit['totalcredit'] } }, { { balance['balance'] } }],
+          data: [{{totalcredit['totalcredit']}}, {{balance['balance']}}],
           backgroundColor: ['#f6c23e', '#36b9cc'],
           hoverBackgroundColor: ['#e0b036', '#2c9faf'],
           hoverBorderColor: "rgba(234, 236, 244, 1)",
