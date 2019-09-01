@@ -20,7 +20,7 @@
 <body>
 
   <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-dark fixed-top rounded-bottom">
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top rounded-bottom">
     <h1 class="navbar-brand"><img id="icon" src="{{ url_for('static', filename='img/icon.png') }}" alt=""> Family Expenses Tracker</h1>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -37,8 +37,8 @@
           <a class="nav-link" href="{{ url_for('viewall') }}"><i class="fa fa-th-list" aria-hidden="true"></i> History</a>
         </li>
         <li class="nav-item active">
-        <a class="nav-link" href="{{ url_for('tags') }}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a>
-      </li>
+          <a class="nav-link" href="{{ url_for('tags') }}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -67,56 +67,56 @@
             <input type="submit" value='Search' class='btn btn-primary mt-3' />
           </form>
         </div>
-      </div>      
+      </div>
       <div class="row">
-          <div class='col'>
-            <h4>Current Selection : {{currenttag['tname']}}</h4>
-          </div>
-        <table class="table table-hover">
-            <thead class="thead-light">
-                <tr>
-                    <th>Transaction</th>
-                    <th class = "hidden">Category</th>
-                    <th class = "hidden">Mode</th>
-                    <th>By</th>
-                    <th class = "hidden">Date Created/Modified</th>
-                    <th>Debit (SGD$)</th>
-                    <th>Credit (SGD$)</th>
-                </tr>
-            </thead>
-            {%for r in data%}
-            <tr>
-                <tbody>
-                <td>
-                {{ r['description'] }}
-                </td>
-                <td class = "hidden">
-                {{ r['cname'] }}
-                </td>
-                <td class = "hidden">
-                {{ r['mname'] }}
-                </td>
-                <td>
-                {{ r['aname'] }}
-                </td>
-                <td class = "hidden">
-                {{ r['createdAt']}}
-                </td>
-                <td>
-                {{ r['debit'] }}
-                </td>
-                <td>
-                {{ r['credit'] }}
-                </td>
-               </tbody>
-            </tr>
-            {%endfor%}
-        </table>
+        <div class='col'>
+          <h4>Current Selection : {{currenttag['tname']}}</h4>
         </div>
+        <table class="table table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Transaction</th>
+              <th class="hidden">Category</th>
+              <th class="hidden">Mode</th>
+              <th>By</th>
+              <th class="hidden">Date Created/Modified</th>
+              <th>Debit (SGD$)</th>
+              <th>Credit (SGD$)</th>
+            </tr>
+          </thead>
+          {%for r in data%}
+          <tr>
+            <tbody>
+              <td>
+                {{ r['description'] }}
+              </td>
+              <td class="hidden">
+                {{ r['cname'] }}
+              </td>
+              <td class="hidden">
+                {{ r['mname'] }}
+              </td>
+              <td>
+                {{ r['aname'] }}
+              </td>
+              <td class="hidden">
+                {{ r['createdAt']}}
+              </td>
+              <td>
+                {{ r['debit'] }}
+              </td>
+              <td>
+                {{ r['credit'] }}
+              </td>
+            </tbody>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
     </div>
   </div>
-  
-    <footer class"rounded-top">
+
+  <footer class "rounded-top">
     <p>Designed by Yu Cheng</p>
   </footer>
 

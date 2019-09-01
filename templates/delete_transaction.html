@@ -20,7 +20,7 @@
 <body>
 
   <!--nav bar-->
-    <nav class="navbar navbar-expand-sm navbar-dark fixed-top rounded-bottom">
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top rounded-bottom">
     <h1 class="navbar-brand"><img id="icon" src="{{ url_for('static', filename='img/icon.png') }}" alt=""> Family Expenses Tracker</h1>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -54,59 +54,59 @@
         </div>
       </div>
       <div class="row">
-          <table class="table table-hover">
-            <thead class="thead-light">
-              <tr>
-                <th>Transaction</th>
-                <th class = "hidden">Category</th>
-                <th class = "hidden">Mode</th>
-                <th>By</th>
-                <th class = "hidden">Date Created/Modified</th>
-                <th>Debit (SGD$)</th>
-                <th>Credit (SGD$)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  {{ transaction['description'] }}
-                </td>
-                <td class = "hidden">
-                  {{ transaction['cname'] }}
-                </td>
-                <td class = "hidden">
-                  {{ transaction['mname'] }}
-                </td>
-                <td>
-                  {{ transaction['aname'] }}
-                </td>
-                <td class = "hidden">
-                  {{ transaction['createdAt']}}
-                </td>
-                <td >
-                  {{ transaction['debit'] }}
-                </td>
-                <td>
-                  {{ transaction['credit'] }}
-                </td>
+        <table class="table table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Transaction</th>
+              <th class="hidden">Category</th>
+              <th class="hidden">Mode</th>
+              <th>By</th>
+              <th class="hidden">Date Created/Modified</th>
+              <th>Debit (SGD$)</th>
+              <th>Credit (SGD$)</th>
             </tr>
-            </tbody>
-          </table>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {{ transaction['description'] }}
+              </td>
+              <td class="hidden">
+                {{ transaction['cname'] }}
+              </td>
+              <td class="hidden">
+                {{ transaction['mname'] }}
+              </td>
+              <td>
+                {{ transaction['aname'] }}
+              </td>
+              <td class="hidden">
+                {{ transaction['createdAt']}}
+              </td>
+              <td>
+                {{ transaction['debit'] }}
+              </td>
+              <td>
+                {{ transaction['credit'] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="row">
       <div class="col"></div>
       <div class="col dialogue">
-        <form method='POST' action='{{ url_for("delete_transaction", id=transaction['id']) }}'>
+        <form method='POST' action='{{ url_for("delete_transaction", id=transaction[' id ']) }}'>
           <p>You are deleting this transaction. This cannot be undone! Are you sure?</p>
           <input class='btn btn-danger' type='submit' value='Delete' />
-          <a class='btn btn-primary' href='{{url_for('viewall')}}'>Back</a>
+          <a class='btn btn-primary' href='{{url_for(' viewall ')}}'>Back</a>
         </form>
       </div>
       <div class="col"></div>
     </div>
   </div>
-  <footer class = "rounded-top">
+  <footer class="rounded-top">
     <p>Designed by Yu Cheng</p>
   </footer>
 
