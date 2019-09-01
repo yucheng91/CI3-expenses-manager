@@ -158,5 +158,10 @@ def viewall():
 ```
 
 ## Credit
+
+Images & Background 
 - icons8.com - Financial icon as the logo
 - webgradients.com - Providing CSS code for the background gradient
+
+Acknowledgements 
+- inspiration for this project is from mobile expenses management such as Monefy- Money Manager,Goodbudget
